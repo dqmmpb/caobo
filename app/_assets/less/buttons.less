@@ -1,0 +1,97 @@
+//Buttons
+.button-variant(@color, @color-active) {
+    border-color: @color;
+    color: @color;
+    &:active {
+        border-color: @color-active;
+        color: @color-active;
+    }
+    &.button-fill {
+      color: white;
+      background-color: @color;
+      &:active {
+        background-color: @color-active;
+      }
+    }
+}
+
+.button-themes() {
+  &.button-light {
+    .button-variant(@color-text-gray-light, @color-primary-active);
+    color: @color-text-secondary;
+  }
+  &.button-dark {
+    .button-variant(#6e727b, @color-primary-active);
+    color: @color-text-secondary;
+  }
+  &.button-success {
+    .button-variant(@color-success, @color-success-active);
+  }
+  &.button-danger {
+    .button-variant(@color-danger, @color-danger-active);
+  }
+  &.button-warning {
+    .button-variant(@color-warning, @color-warning-active);
+  }
+}
+
+.button {
+
+  border: 1px solid @color-primary;
+  color: @color-primary;
+
+  &:active {
+    color: @color-primary-active;
+    border-color: @color-primary-active;
+  }
+
+  .button-themes();
+
+  &,
+  &.button-primary,
+  &.button-success,
+  &.button-danger,
+  &.button-warning {
+    &.disabled {
+      .button-variant(@color-text-gray-light, @color-text-gray-light);
+      cursor: not-allowed;
+    }
+  }
+
+  &.button-link {
+    color: @color-href;
+  }
+}
+
+a.button {
+
+  border: 1px solid @color-primary;
+  color: @color-primary;
+
+  &:active {
+    color: @color-primary-active;
+    border-color: @color-primary-active;
+  }
+
+  .button-themes();
+
+  &,
+  &.button-primary,
+  &.button-success,
+  &.button-danger,
+  &.button-warning {
+    &.disabled {
+      .button-variant(@color-text-gray-light, @color-text-gray-light);
+      cursor: not-allowed;
+    }
+  }
+
+  &.button-link {
+    color: @color-href;
+  }
+}
+
+
+.button-block {
+  width: 100%;
+}

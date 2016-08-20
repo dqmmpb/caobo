@@ -1,0 +1,51 @@
+{
+  "name": "caobo",
+  "private": true,
+  "dependencies": {
+    "modernizr": "~2.8.1",
+    "font-awesome": "fontawesome#^4.6.1",
+    "jquery": "^2.2.3",
+    "light7": "light7-dqm#^0.4.4",
+    "template.js": "^0.7.1",
+    "js-cookie": "^2.1.0",
+    "js-base64": "^2.1.9",
+    "jquery-form": "^3.46.0",
+    "jquery-validation": "^1.15.0",
+    "jquery-md5": "*",
+    "fecha": "^2.0.0"
+  },
+  "devDependencies": {
+    "mocha": "~2.3.4",
+    "chai": "~3.4.2"
+  },
+  "overrides": {
+    "font-awesome": {
+      "main": [
+        "css/font-awesome.min.css",
+        "fonts/*"
+      ]
+    },
+    "light7": {
+      "main": [
+        "./dist/css/light7.css",
+        "./dist/css/light7-swiper.css",
+        "./dist/js/light7.js",
+        "./dist/js/light7-swipeout.js",
+        "./dist/js/light7-swiper.js",
+        "./dist/js/i18n/cn.js",
+        "./dist/fonts/*",
+        "./dist/img/*"
+      ]
+    },
+    "jquery.base64.js": {
+      "main": [
+        "jquery.base64.js"
+      ]
+    },
+    "jquery-md5": {
+      "main": [
+        "jquery.md5.js"
+      ]
+    }
+  }
+}

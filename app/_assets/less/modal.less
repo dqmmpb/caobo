@@ -1,0 +1,28 @@
+.modal {
+  @color-modal-hairline: #b5b5b5;
+  background: @color-modal-hairline;
+
+  &.modal-in {
+    transform: translate3d(0, 0, 0);
+    transition-duration: 0ms;
+  }
+
+  .fa.fa-preloader {
+    width: 40px;
+    height: 40px;
+    font-size: 40px;
+  }
+}
+
+.modal-buttons {
+  .modal-button:last-child {
+    border-right: none;
+  }
+}
+
+
+.panel-left {
+  &.active {
+    display: block;
+  }
+}

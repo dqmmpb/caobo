@@ -1,0 +1,46 @@
+{
+  "id": 3,
+  "title": "Act3",
+  "pattern": "item_vote",
+  "expire_time": "2016-08-25 17:39:00",
+  "comment_count": 0,
+  "code": "ab23e7f18cddb1b4",
+  "hide_results": false,
+  "archieved": false,
+  "multi_choice": false,
+  "description": "",
+  "place": "杭州西湖",
+  "longi_and_lati": "",
+  "user_info": {
+    "id": 1,
+    "nickname": "Jack",
+    "avatar": "http://7xqlni.com1.z0.glb.clouddn.com/FiM-Evxy_HSlko73tHTsgpIEwt46"
+  },
+  "invitors": [{
+    "id": 2,
+    "name": "Tommy",
+    "avatar": "http://7xqlni.com1.z0.glb.clouddn.com/Fq2vWh7BGGIg4ITGkjAaCw9ImUN2",
+    "email": "452248365@163.com"
+  }],
+  "items": [
+    {
+      "id": 5,
+      "content": "Aaa",
+      "count": 1,
+      "voted": false
+    },
+    {
+      "id": 6,
+      "content": "Bbb",
+      "count": 1,
+      "voted": true
+    },
+    {
+    "id": 7,
+    "content": "Ccc",
+    "count": 0,
+    "voted": false
+    }
+  ],
+  "best_item_ids": null
+}

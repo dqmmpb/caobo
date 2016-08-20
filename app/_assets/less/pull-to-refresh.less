@@ -1,0 +1,49 @@
+@layerHeight:  44px;
+
+.pull-to-refresh-layer {
+  .pull-to-refresh-arrow {
+    display: none;
+    margin-left: -.325rem;
+  }
+}
+
+.pull-up, .pull-down {
+  .pull-to-refresh-layer {
+    .pull-to-refresh-arrow {
+      display: block;
+    }
+  }
+}
+
+.infinite-scroll-preloader {
+  margin: 0;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: @layerHeight;
+  font-size: 0;
+  display: none;
+  .preloader {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    margin-top: -10px;
+    margin-left: -10px;
+  }
+
+  .infinite-scroll-more-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    width: 56px;
+    height: 20px;
+    font-size: @font-size-default;
+    margin-top: -10px;
+    margin-left: -28px;
+    display: none;
+  }
+}

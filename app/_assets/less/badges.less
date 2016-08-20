@@ -1,0 +1,56 @@
+//
+// Badges
+// --------------------------------------------------
+
+.badge {
+  display: inline-block;
+  padding: 0.1rem 0.45rem 0.15rem;
+  font-size: 0.6rem;
+  line-height: 1;
+  color: @color-text;
+  background-color: rgba(0, 0, 0,.15);
+  border-radius: 5rem;
+
+  // Inverted badges have no background.
+  &.badge-inverted {
+    padding: 0 0.25rem 0 0;
+    background-color: transparent;
+  }
+}
+
+.badge-variant(@color, @color-active) {
+  border-color: @color;
+  color: @color;
+  &:active {
+    border-color: @color-active;
+    color: @color-active;
+  }
+  &.badge-fill {
+    color: white;
+    background-color: @color;
+    &:active {
+      background-color: @color-active;
+    }
+  }
+}
+
+.badge-themes() {
+  &.badge-light {
+    .badge-variant(@color-text-gray-light, @color-primary-active);
+    color: @color-text-secondary;
+  }
+  &.badge-dark {
+    .badge-variant(#6e727b, @color-primary-active);
+    color: @color-text-secondary;
+  }
+  &.badge-success {
+    .badge-variant(@color-success, @color-success-active);
+  }
+  &.badge-danger {
+    .badge-variant(@color-danger, @color-danger-active);
+  }
+  &.badge-warning {
+    .badge-variant(@color-warning, @color-warning-active);
+  }
+}
+.badge-themes();
