@@ -5,6 +5,38 @@ $(document).on('pageInit', '#page-index', function(e, id, page) {
 
   var loading = false, end = false;
 
+  function getUserInfo(userId, data) {
+    if(userId) {
+      if(data instanceof Array) {
+        for(var i = 0; i < data.length; i++) {
+          if(userId === '' + data[i].id) {
+            return data[i];
+          }
+        }
+      } else if(data instanceof Object) {
+        if(userId === '' + data.id) {
+          return data;
+        }
+      }
+    }
+  }
+
+  function initModal(data, append) {
+    var tpl = $(page).find('#tpl-modal').html();
+    var html_data = template(tpl, {data: data});
+
+    var modal = $.modal({
+      afterText: html_data,
+      buttons: [
+
+      ]
+    });
+
+    $(modal).find('.close').click(function() {
+      $.closeModal(modal);
+    });
+  }
+
   function initActivity(data, append) {
 
     var $content = $(page).find('.content');
@@ -19,6 +51,17 @@ $(document).on('pageInit', '#page-index', function(e, id, page) {
       $html_data.appendTo($wrapper);
     } else
       $wrapper.html($html_data);
+
+    $content.find('.avatar').each(function(){
+      $(this).click(function() {
+        var userId = $(this).data('user-id');
+        var userInfo = getUserInfo(userId, data['user_info']);
+        if(userInfo)
+          initModal(userInfo);
+        else
+          $.alert('暂无该用户信息');
+      });
+    });
 
   }
 
@@ -55,6 +98,17 @@ $(document).on('pageInit', '#page-index', function(e, id, page) {
           spaceBetween: 0
         }
       }
+    });
+
+    $content.find('.avatar').each(function(){
+      $(this).click(function() {
+        var userId = $(this).data('user-id');
+        var userInfo = getUserInfo(userId, data.invitors);
+        if(userInfo)
+          initModal(userInfo);
+        else
+          $.alert('暂无该用户信息');
+      });
     });
   }
 

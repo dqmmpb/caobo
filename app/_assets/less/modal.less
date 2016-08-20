@@ -1,6 +1,10 @@
 .modal {
-  @color-modal-hairline: #b5b5b5;
-  background: @color-modal-hairline;
+
+  & .close {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+  }
 
   &.modal-in {
     transform: translate3d(0, 0, 0);
@@ -11,6 +15,38 @@
     width: 40px;
     height: 40px;
     font-size: 40px;
+  }
+
+  & .avatar {
+    .avatar-img {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      .img {
+        width: 64px;
+        height: 64px;
+        line-height: 64px;
+        border-radius: 50%;
+        display: block;
+        vertical-align: middle;
+        text-align: center;
+        font-size: 20px;
+      }
+    }
+  }
+
+  & .avatar-info {
+    margin: 0;
+    text-align: center;
+    color: @card-bg;
+
+    & .avatar-img {
+      margin: 0 auto;
+    }
+
+    & .avatar-title {
+      margin: 0.5em 0;
+    }
   }
 }
 

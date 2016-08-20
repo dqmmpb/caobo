@@ -78,15 +78,17 @@
               </div>
             </div>
             <div class="card-footer">
-              <div class="list-block media-list">
+              <div class="list-block media-list user-info">
                 <ul>
                   <li class="item-content">
-                    <div class="item-media item-media-avatar">
-                      <img src="<%:=data['user_info'].avatar%>" class="avatar-img">
+                    <div class="item-media avatar" data-user-id="<%:=data['user_info'].id%>">
+                      <div class="avatar-img">
+                        <img src="<%:=data['user_info'].avatar%>" class="img">
+                      </div>
                     </div>
                     <div class="item-inner">
                       <div class="item-title-row">
-                        <div class="item-title"><%:=data['user_info'].nickname%></div>
+                        <div class="item-title"><%:=data['user_info'].name%></div>
                       </div>
                       <div class="item-title-row">
                         <div class="item-subtitle"><%:=data['expire_time']%></div>
@@ -157,7 +159,7 @@
             <div class="swiper-wrapper">
               <%for(var i = 0; i < data.invitors.length; i++) {%>
               <div class="swiper-slide">
-                <div class="avatar">
+                <div class="avatar" data-user-id="<%:=data.invitors[i].id%>">
                   <div class="avatar-img">
                     <%if(data.invitors[i].avatar) {%>
                     <img src="<%:=data.invitors[i].avatar%>" class="img">
@@ -178,6 +180,22 @@
           <!-- Add Arrows -->
           <div class="swiper-button-next"></div>
           <div class="swiper-button-prev"></div>
+        </div>
+      </script>
+
+      <!-- 模板 -->
+      <script id="tpl-modal" type="text/html">
+        <div class="close pull-right">
+          <i class="fa fa-lg fa-close"></i>
+        </div>
+        <div class="avatar-info">
+          <div class="avatar">
+            <div class="avatar-img">
+              <img src="<%:=data.avatar%>" class="img">
+            </div>
+          </div>
+          <div class="avatar-title"><%:=data.name%></div>
+          <div class="avatar-subtitle"><%:=data.email%></div>
         </div>
       </script>
 

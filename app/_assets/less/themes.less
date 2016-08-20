@@ -362,6 +362,19 @@ Framework7 Layouts Themes
     color: @activeLink;
   }
 
+  .modal-overlay.modal-overlay-visible, .preloader-indicator-overlay.modal-overlay-visible, .popup-overlay.modal-overlay-visible {
+    background-image: linear-gradient(top, @barsBg, @barsText, @barsBg);
+    opacity: 1;
+  }
+
+  .modal {
+    background: @barsBg;
+    & .modal-inner {
+      background: @barsBg;
+      color: @barsText;
+    }
+  }
+
   .bar-nav {
     .hairline-color(bottom, @barsBorder);
     background-color: @barsBg;
