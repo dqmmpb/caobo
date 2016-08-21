@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <title>我的信息</title>
+  <title>登录</title>
 
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <!-- Place favicon.ico in the root directory -->
@@ -35,13 +35,40 @@
     <div id="page-login" class="page">
       <!-- 标题栏 -->
       <header class="bar bar-nav">
-        <a class="icon icon-left pull-left back" href="index.html" alt="返回"></a>
-        <h1 class="title">我的信息</h1>
-        <a class="icon fa fa-fw fa-home pull-right external" href="index.html" alt="投票"></a>
+        <h1 class="title">登录</h1>
       </header>
 
       <!-- 这里是页面内容区 -->
       <div class="content">
+        <div class="list-block">
+          <ul>
+            <!-- Text inputs -->
+            <li>
+              <div class="item-content">
+                <div class="item-media"><i class="fa fa-fw fa-user"></i></div>
+                <div class="item-inner">
+                  <div class="item-input">
+                    <input type="text" placeholder="邮箱/手机">
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="item-content">
+                <div class="item-media"><i class="fa fa-fw fa-lock"></i></div>
+                <div class="item-inner">
+                  <div class="item-input">
+                    <input type="text" placeholder="请输入密码">
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="content-block">
+          <p><a href="javascript:void(0);" class="button button-fill button-primary">登录</a></p>
+          <p><a href="#">忘记密码</a></p>
+        </div>
       </div>
 
     </div>

@@ -45,23 +45,22 @@
 
     .avatar {
       & .avatar-img {
-        width: 34px;
-        height: 34px;
+        width: 32px;
+        height: 32px;
         border-radius: 50%;
-        border: 2px solid @card-bg;
         .img {
-          width: 30px;
-          height: 30px;
+          width: 32px;
+          height: 32px;
           line-height: 30px;
           border-radius: 50%;
           display: block;
           vertical-align: middle;
           text-align: center;
           font-size: 14px;
+          border: 2px solid @card-bg;
         }
         .img-text {
-          background: lighten(#5677fc, 20%);
-          color: @card-bg;
+          border: 2px solid @card-bg;
         }
       }
     }
@@ -243,7 +242,7 @@
   }
 
   .activity-card-list {
-
+    margin-bottom: 20px;
     .card-header {
       min-height: 16px;
       padding: 0 15px;
@@ -313,5 +312,13 @@
       bottom: 0;
       border-radius: 0;
     }
+  }
+}
+
+#page-login {
+  .list-block {
+  }
+  .content-block {
+    margin: 0;
   }
 }

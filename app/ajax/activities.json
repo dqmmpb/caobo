@@ -17,12 +17,14 @@
     "avatar": "http://7xqlni.com1.z0.glb.clouddn.com/FiM-Evxy_HSlko73tHTsgpIEwt46",
     "email": "dqmmpb@163.com"
   },
-  "invitors": [{
-    "id": 2,
-    "name": "Tommy",
-    "avatar": "http://7xqlni.com1.z0.glb.clouddn.com/Fq2vWh7BGGIg4ITGkjAaCw9ImUN2",
-    "email": "452248365@163.com"
-  }],
+  "invitors": [
+    {
+      "id": 2,
+      "name": "Tommy",
+      "avatar": "http://7xqlni.com1.z0.glb.clouddn.com/Fq2vWh7BGGIg4ITGkjAaCw9ImUN2",
+      "email": "452248365@163.com"
+    }
+  ],
   "items": [
     {
       "id": 5,
@@ -37,10 +39,34 @@
       "voted": true
     },
     {
-    "id": 7,
-    "content": "Ccc",
-    "count": 0,
-    "voted": false
+      "id": 7,
+      "content": "Ccc",
+      "count": 0,
+      "voted": false
+    },
+    {
+      "id": 8,
+      "content": "Ddd",
+      "count": 2,
+      "voted": false
+    },
+    {
+      "id": 9,
+      "content": "Eee",
+      "count": 3,
+      "voted": false
+    },
+    {
+      "id": 10,
+      "content": "Fff",
+      "count": 0,
+      "voted": false
+    },
+    {
+      "id": 11,
+      "content": "Ggg",
+      "count": 2,
+      "voted": false
     }
   ],
   "best_item_ids": null

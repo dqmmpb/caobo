@@ -55,7 +55,7 @@ $(document).on('pageInit', '#page-index', function(e, id, page) {
     $content.find('.avatar').each(function(){
       $(this).click(function() {
         var userId = $(this).data('user-id');
-        var userInfo = getUserInfo(userId, data['user_info']);
+        var userInfo = getUserInfo(userId, data.user_info);
         if(userInfo)
           initModal(userInfo);
         else
