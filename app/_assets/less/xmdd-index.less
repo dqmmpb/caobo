@@ -316,9 +316,37 @@
 }
 
 #page-login {
-  .list-block {
+
+
+  .login {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 11000;
+    width: 270px;
+    margin-top: -100px;
+    margin-left: -135px;
+    color: #3d4145;
+    text-align: center;
+    border-radius: 7px;
+
+    & .login-inner {
+      position: relative;
+      padding: 15px;
+      border-radius: 15px;
+    }
+  }
+
+  .list-block-login {
+
+    .item-content {
+    }
+
+    input[type="text"] {
+    }
   }
   .content-block {
     margin: 0;
+    padding: 0;
   }
 }

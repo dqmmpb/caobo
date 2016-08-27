@@ -363,7 +363,15 @@ Framework7 Layouts Themes
   }
 
   .modal-overlay.modal-overlay-visible, .preloader-indicator-overlay.modal-overlay-visible, .popup-overlay.modal-overlay-visible {
-    background-image: linear-gradient(top, @barsBg, @barsText, @barsBg);
+   // background-image: linear-gradient(top, to bottom, @barsBg, @barsText, @barsBg);
+    .directional-gradient-color(@barsBg, @barsText, @barsBg, 0deg);
+    opacity: 1;
+  }
+
+
+  .page-full-bg {
+    // background-image: linear-gradient(top, to bottom, @barsBg, @barsText, @barsBg);
+    .directional-gradient-color(@barsBg, @barsText, @barsBg, 0deg);
     opacity: 1;
   }
 
@@ -564,6 +572,33 @@ Framework7 Layouts Themes
 
   i.fa-pencil-square-o {
     color: @iconColorWarning;
+  }
+
+  .login {
+    background: @barsBg;
+    & .login-inner {
+      background: @barsBg;
+      color: @barsText;
+
+      & .item-content {
+        background: @barsText;
+        color: @barsBg;
+      }
+
+      ul {
+        .hairline-remove(top);
+        .hairline-remove(bottom);
+      }
+
+      input[type="text"]::-webkit-input-placeholder {
+        color: @barsBg;
+      }
+    }
+
+    .content-block {
+      margin: 0;
+      padding: 0;
+    }
   }
 }
 

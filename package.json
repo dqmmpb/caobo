@@ -53,14 +53,12 @@
       "mozCancelAnimationFrame": true,
       "wx": true,
       "template": true,
-      "Shop": true,
       "Cookies": true,
       "Base64": true,
       "Arg": true,
-      "XMDD": true,
-      "MakeXMDD": true,
       "fecha": true,
-      "define": true
+      "define": true,
+      "url": true
     },
     "rules": {
       "quotes": [
@@ -78,7 +76,8 @@
       "curly": false,
       "no-underscore-dangle": false,
       "consistent-return": false,
-      "camelcase": false
+      "camelcase": false,
+      "no-trailing-spaces": false
     }
   },
   "config": {

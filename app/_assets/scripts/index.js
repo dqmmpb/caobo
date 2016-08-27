@@ -3,7 +3,29 @@
 //下拉刷新 上拉加载
 $(document).on('pageInit', '#page-index', function(e, id, page) {
 
+  var activityId = $.Cfg.getActivityId(location.href);
+  activityId = 1;
+
   var loading = false, end = false;
+
+  function loadError(message){
+    var $content = $(page).find('.content');
+    var $wrapper = $($content).find('.content-wrapper');
+    var tpl = $(page).find('#tpl-error').html();
+    var data = {
+      message: message
+    };
+    // 生成新条目的HTML
+    var html_data = template(tpl, {data: data});
+    var $html_data = $(html_data);
+
+    $wrapper.html($html_data);
+
+    $.pullToRefreshDone($content);
+    // 重置加载flag
+    loading = false;
+
+  }
 
   function getUserInfo(userId, data) {
     if(userId) {
@@ -27,9 +49,7 @@ $(document).on('pageInit', '#page-index', function(e, id, page) {
 
     var modal = $.modal({
       afterText: html_data,
-      buttons: [
-
-      ]
+      buttons: []
     });
 
     $(modal).find('.close').click(function() {
@@ -112,42 +132,81 @@ $(document).on('pageInit', '#page-index', function(e, id, page) {
     });
   }
 
+  function initBar(data, append) {
 
-  function loadData(append, refresh){
     var $content = $(page).find('.content');
 
-    var params = {
-      'open_id': 'xaaafdasfasdlkfjl...',
-      'email': 'a@b.com',
-      'name': 'Tom'
-    };
+    var $barFooter = $(page).find('.bar-footer');
+    if($barFooter.length == 0) {
+      $barFooter = $('<footer class="bar bar-footer"></footer>');
+      $barFooter.insertBefore($($content));
+    }
 
-    $.ajax({
-      url: $.Cfg.api.services.activities.info,
-      data: JSON.stringify(params),
-      type: 'GET',
-      timeout: $.Cfg.config.timeout,
-      success: function(respData, status) {
-        if(respData) {
-          initActivity(respData, append);
-          initSwiper(respData, append);
+    if(data.archieved)
+      $barFooter.html($('<a class="button button-block button-fill button-primary button-next disabled">投票结束</a>'));
+    else
+      $barFooter.html($('<a class="button button-block button-fill button-primary button-next">投票</a>'));
 
-          if(refresh) {
-            $.pullToRefreshDone($content);
-          } else {
-            // 重置加载flag
-            loading = false;
-          }
-        }
-      },
-      complete: function(xhr, status) {
-        if(status === 'timeout') {
-          $.toast('网络异常，请重试');
-        }
-        // 重置加载flag
-        loading = false;
+    if(!data.hide_results) {
+      var $barFooterS = $(page).find('.footer-secondary');
+      if($barFooterS.length == 0) {
+        $barFooterS = $('<div class="bar bar-footer-secondary bar-footer-secondary-swiper"></div>');
+        $barFooterS.insertBefore($($barFooter));
       }
-    });
+
+      initSwiper(data, append);
+    }
+
+  }
+
+  function loadData(append, refresh){
+
+    if(activityId) {
+
+      var $content = $(page).find('.content');
+
+      var params = {
+        'open_id': 'xaaafdasfasdlkfjl...',
+        'email': 'a@b.com',
+        'name': 'Tom'
+      };
+
+      $.ajax({
+        url: $.Cfg.api.services.activities.info,
+        data: JSON.stringify(params),
+        type: 'GET',
+        timeout: $.Cfg.config.timeout,
+        success: function (data, status) {
+          if (data) {
+
+            initBar(data, append);
+            initActivity(data, append);
+
+            if (refresh) {
+              $.pullToRefreshDone($content);
+            } else {
+              // 重置加载flag
+              loading = false;
+            }
+          } else {
+            loadError('数据加载有误，请刷新重试');
+          }
+        },
+        error: function(xhr, status, errorThrown) {
+          if (status === 'timeout') {
+            loadError('网络异常，请刷新重试');
+          }
+        },
+        complete: function (xhr, status) {
+          // 重置加载flag
+          loading = false;
+        }
+      });
+
+    } else {
+
+      loadError('活动链接已失效');
+    }
 
   }
 
@@ -171,10 +230,10 @@ $(document).on('pageInit', '#page-index', function(e, id, page) {
     });
   }
 
+
   function init() {
     // 设置flag
     loading = true;
-
     loadData(false, false);
     pullToRefreshAction();
 

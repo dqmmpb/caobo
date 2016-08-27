@@ -7,24 +7,24 @@
       this.config = {
         server: 'http://' + location.host,
         timeout: 10000,
-        path: '',
-        icons: {
-          amap: {
-            default: 'assets/images/xm-ic-amap-marker.png',
-            click: 'assets/images/xm-ic-amap-marker-click.png'
-          }
-        }
+        path: ''
       };
 
       this.api = {
         services: {
           auth: {
-            login: this.config.server + '/washcar/home'
+            login: this.config.server + '/ajax/login.json'
           },
           activities: {
             info: this.config.server + '/ajax/activities.json'
           }
         }
+      };
+
+      this.getActivityId = function(path) {
+        var activityId = url('?activityid', path);
+        if(activityId)
+          return activityId;
       };
     }
 /*
