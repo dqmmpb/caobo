@@ -7,6 +7,9 @@ var srcAssets         = 'app/_assets';
 var developmentAssets = 'build/assets';
 var productionAssets  = 'build/production/assets';
 var tar               = 'tar';
+var dist              = 'build/dist';
+var distAssets        = 'build/dist/assets';
+var rev               = 'build/rev';
 
 module.exports = {
   project: {
@@ -123,6 +126,23 @@ module.exports = {
       dest: production
     }
   },
+  rev: {
+    production: {
+      useref: {
+        searchPath: [production, '.' ]
+      },
+      jsfilter: ['**/*.js'],
+      cssfilter: ['**/*.css'],
+      nojscssfilter: ['**/*', '!**/*.js', '!**/*.css'],
+      src: production + '/**/*',
+      dest: dist,
+      hash: {
+        src: production + '/**/*.html',
+        dest: dist,
+        assetsDir: production
+      }
+    }
+  },
   clean: {
     development: {
       files: [build]
@@ -174,7 +194,7 @@ module.exports = {
   tar: {
     name: project + '.tar',
     production: {
-      src: production + '/**',
+      src: dist + '/**',
       dest: tar
     }
   }

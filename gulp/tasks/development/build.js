@@ -6,10 +6,14 @@ import {build as config}  from '../../config';
 
 const $ = gulpLoadPlugins();
 
-gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {
+gulp.task('build', () => {
+  return gulp.src(config.development.src)
+    .pipe($.size({title: 'build', gzip: true}));
+});
+
+gulp.task('build:sequence', (cb) => {
 
   browserSync.notify('Building');
 
-  return gulp.src(config.development.src)
-    .pipe($.size({title: 'build', gzip: true}));
+  $.sequence('clean', 'lint', ['fonts', 'images'], 'less', 'html', 'extras', 'build', cb);
 });

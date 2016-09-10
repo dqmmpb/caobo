@@ -1,242 +1,252 @@
 <!doctype html>
 <html class="no-js theme-gray" lang="">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <title>我要投票</title>
+<title>我要投票</title>
 
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <!-- Place favicon.ico in the root directory -->
-  <link type="image/x-icon" href="favicon.ico" rel="shortcut icon">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<!-- Place favicon.ico in the root directory -->
+<link type="image/x-icon" href="favicon.ico" rel="shortcut icon">
 
-  <!-- build:css assets/css/vendor.css -->
-  <!-- bower:css -->
-  <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="/bower_components/light7/dist/css/light7.css" />
-  <link rel="stylesheet" href="/bower_components/light7/dist/css/light7-swiper.css" />
-  <!-- endbower -->
-  <!-- endbuild -->
+<!-- rev-hash -->
+<!-- build:css assets/css/vendor.css -->
+<!-- bower:css -->
+<link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css" />
+<link rel="stylesheet" href="/bower_components/light7/dist/css/light7.css" />
+<link rel="stylesheet" href="/bower_components/light7/dist/css/light7-swiper.css" />
+<!-- endbower -->
+<!-- endbuild -->
+<!-- end -->
 
-  <!-- build:css assets/css/xmdd.css -->
-  <link rel="stylesheet" href="/assets/css/xmdd.css">
-  <!-- endbuild -->
+<!-- rev-hash -->
+<!-- build:css assets/css/xmdd.css -->
+<link rel="stylesheet" href="/assets/css/xmdd.css">
+<!-- endbuild -->
+<!-- end -->
 
 </head>
 <body>
+<!-- page集合的容器，里面放多个平行的.page，其他.page作为内联页面由路由控制展示 -->
+<div class="page-group">
+  <!-- 单个page ,第一个.page默认被展示-->
+  <div id="page-index" class="page">
+    <!-- 标题栏 -->
+    <header class="bar bar-nav">
+     <!-- <a class="icon icon-left pull-left back" href="index.html" alt="返回"></a>-->
+     <!-- <a class="icon fa fa-fw fa-user active pull-left open-panel" data-panel=".panel-left"></a>-->
+      <h1 class="title">我要投票</h1>
+      <a class="icon fa fa-fw fa-sign-out external pull-right" href="login.html" external alt="退出"></a>
+     <!--  <a class="icon fa fa-fw fa-map-marker pull-right" external alt="地点"></a>-->
+    </header>
 
-  <!-- page集合的容器，里面放多个平行的.page，其他.page作为内联页面由路由控制展示 -->
-  <div class="page-group">
-    <!-- 单个page ,第一个.page默认被展示-->
-    <div id="page-index" class="page">
-      <!-- 标题栏 -->
-      <header class="bar bar-nav">
-       <!-- <a class="icon icon-left pull-left back" href="index.html" alt="返回"></a>-->
-       <!-- <a class="icon fa fa-fw fa-user active pull-left open-panel" data-panel=".panel-left"></a>-->
-        <h1 class="title">我要投票</h1>
-        <a class="icon fa fa-fw fa-sign-out external pull-right" href="login.html" external alt="退出"></a>
-       <!--  <a class="icon fa fa-fw fa-map-marker pull-right" external alt="地点"></a>-->
-      </header>
+    <!-- 这里是页面内容区 -->
+    <div class="content pull-to-refresh-content">
 
-      <!-- 这里是页面内容区 -->
-      <div class="content pull-to-refresh-content">
-
-        <!-- 加载提示符 -->
-        <div class="pull-to-refresh-layer">
-          <div class="preloader"></div>
-          <div class="pull-to-refresh-arrow"></div>
-        </div>
-
-        <div class="content-wrapper"></div>
-
+      <!-- 加载提示符 -->
+      <div class="pull-to-refresh-layer">
+        <div class="preloader"></div>
+        <div class="pull-to-refresh-arrow"></div>
       </div>
 
-      <!-- 模板 -->
-      <script id="tpl-activity" type="text/html">
-
-        <%if(!data) {%>
-          <div class="content-block empty text-center">暂无数据</div>
-        <%} else {%>
-          <%if(data.items && data.items.length) {%>
-          <!-- 活动详情 -->
-          <div class="card activity-card">
-            <div class="card-header"><%:=data.title%></div>
-            <div class="card-content">
-              <div class="card-content-inner">
-                <p><i class="fa fa-lg fa-pencil-square-o"></i> 一些描述</p>
-              </div>
-            </div>
-            <div class="card-footer">
-              <div class="list-block media-list user-info">
-                <ul>
-                  <li class="item-content">
-                    <div class="item-media avatar" data-user-id="<%:=data['user_info'].id%>">
-                      <div class="avatar-img">
-                        <img src="<%:=data['user_info'].avatar%>" class="img">
-                      </div>
-                    </div>
-                    <div class="item-inner">
-                      <div class="item-title-row">
-                        <div class="item-title"><%:=data['user_info'].name%></div>
-                      </div>
-                      <div class="item-title-row">
-                        <div class="item-subtitle"><%:=data['expire_time']%></div>
-                        <div class="item-after"><a href="javascript:void(0);" class="item-after-large"><i class="fa fa-fw fa-2x fa-share-square-o"></i></a> <a href="javascript:void(0);" class="item-after-large"><i class="fa fa-fw fa-2x fa-commenting-o"></i></a></div>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div class="card activity-card-list">
-            <div class="card-header"></div>
-            <div class="card-content">
-              <!-- 投票选项 -->
-              <div class="list-block media-list inset item-list">
-                <ul>
-                  <%for(var i = 0; i < data.items.length; i++) {%>
-                  <li>
-                    <label class="label-checkbox item-content">
-                      <%if(data['multi_choice']) {%>
-                      <%if(data.items[i].voted) {%>
-                      <input type="checkbox" name="my-vote" checked>
-                      <%} else {%>
-                      <input type="checkbox" name="my-vote">
-                      <%}%>
-                      <%} else {%>
-                      <%if(data.items[i].voted) {%>
-                      <input type="radio" name="my-vote" checked>
-                      <%} else {%>
-                      <input type="radio" name="my-vote">
-                      <%}%>
-                      <%}%>
-                      <div class="item-inner item-inner-more">
-                        <div class="item-title-row">
-                          <div class="item-title">
-                            <div><%:=data.items[i].content%></div>
-                            <div><%:=data.items[i].content%></div>
-                          </div>
-                          <div class="item-after"><%:=data['hide_results'] ? '': data.items[i].count%></div>
-                        </div>
-                      </div>
-                      <div class="item-media">
-                        <div>
-                          <i class="icon icon-form-checkbox"></i>
-                        </div>
-                      </div>
-                    </label>
-                  </li>
-                  <%}%>
-                </ul>
-              </div>
-            </div>
-            <div class="card-footer"></div>
-          </div>
-
-          <%}%>
-        <%}%>
-
-      </script>
-
-      <!-- 模板 -->
-      <script id="tpl-swiper" type="text/html">
-        <div class="vote-total-recently">最近投票 共计<span><%:=data.invitors.length%></span>人</div>
-        <div class="swiper-vote">
-          <div class="swiper-container">
-            <div class="swiper-wrapper">
-              <%for(var i = 0; i < data.invitors.length; i++) {%>
-              <div class="swiper-slide">
-                <div class="avatar" data-user-id="<%:=data.invitors[i].id%>">
-                  <div class="avatar-img">
-                    <%if(data.invitors[i].avatar) {%>
-                    <img src="<%:=data.invitors[i].avatar%>" class="img">
-                    <%} else if(data.invitors[i].name) {%>
-                    <div class="img img-text"><%:=data.invitors[i].name.substring(0, 1)%></div>
-                    <%} else if(data.invitors[i].email) {%>
-                    <div class="img img-text"><%:=data.invitors[i].email.substring(0, 1)%></div>
-                    <%} else {%>
-                    <img src="assets/images/avatar-default.png" class="img">
-                    <%}%>
-                  </div>
-                </div>
-              </div>
-              <%}%>
-            </div>
-
-          </div>
-          <!-- Add Arrows -->
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-        </div>
-      </script>
-
-      <!-- Info模板 -->
-      <script id="tpl-modal" type="text/html">
-        <div class="close pull-right">
-          <i class="fa fa-lg fa-close"></i>
-        </div>
-        <div class="avatar-info">
-          <div class="avatar">
-            <div class="avatar-img">
-              <img src="<%:=data.avatar%>" class="img">
-            </div>
-          </div>
-          <div class="avatar-title"><%:=data.name%></div>
-          <div class="avatar-subtitle"><%:=data.email%></div>
-        </div>
-      </script>
-
-      <!-- 模板 -->
-      <script id="tpl-error" type="text/html">
-
-        <div class="content-block empty text-center"><%:=data.message%></div>
-
-      </script>
+      <div class="content-wrapper"></div>
 
     </div>
 
-    <div class="panel-overlay"></div>
+    <!-- 模板 -->
+    <script id="tpl-activity" type="text/html">
+
+      <%if(!data) {%>
+        <div class="content-block empty text-center">暂无数据</div>
+      <%} else {%>
+        <%if(data.items && data.items.length) {%>
+        <!-- 活动详情 -->
+        <div class="card activity-card">
+          <div class="card-header"><%:=data.title%></div>
+          <div class="card-content">
+            <div class="card-content-inner"><!--<i class="fa fa-lg fa-pencil-square-o"></i> --><%:=data.description%></div>
+          </div>
+          <div class="card-footer">
+            <div class="list-block media-list user-info">
+              <ul>
+                <li class="item-content">
+                  <div class="item-media avatar" data-user-id="<%:=data['user_info'].id%>">
+                    <div class="avatar-img">
+                      <img src="<%:=data['user_info'].avatar%>" class="img">
+                    </div>
+                  </div>
+                  <div class="item-inner">
+                    <div class="item-title-row">
+                      <div class="item-title"><%:=data['user_info'].name%></div>
+                    </div>
+                    <div class="item-title-row">
+                      <div class="item-subtitle"><%:=data['expire_time']%></div>
+                      <div class="item-after"><a href="javascript:void(0);" class="item-after-large"><i class="fa fa-fw fa-2x fa-share-square-o"></i></a> <a href="javascript:void(0);" class="item-after-large"><i class="fa fa-fw fa-2x fa-commenting-o"></i></a></div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="card activity-card-list">
+          <div class="card-header"></div>
+          <div class="card-content">
+            <!-- 投票选项 -->
+            <div class="list-block media-list inset item-list">
+              <ul>
+                <%for(var i = 0; i < data.items.length; i++) {%>
+                <li>
+                  <label class="label-checkbox item-content">
+                    <%if(data['multi_choice']) {%>
+                    <%if(data.items[i].voted) {%>
+                    <input type="checkbox" name="my-vote" checked>
+                    <%} else {%>
+                    <input type="checkbox" name="my-vote">
+                    <%}%>
+                    <%} else {%>
+                    <%if(data.items[i].voted) {%>
+                    <input type="radio" name="my-vote" checked>
+                    <%} else {%>
+                    <input type="radio" name="my-vote">
+                    <%}%>
+                    <%}%>
+                    <div class="item-inner item-inner-more">
+                      <div class="item-title-row">
+                        <div class="item-title">
+                          <div><%:=data.items[i].content%></div>
+                          <div><%:=data.items[i].content%></div>
+                        </div>
+                        <div class="item-after"><%:=data['hide_results'] ? '': data.items[i].count%></div>
+                      </div>
+                    </div>
+                    <div class="item-media">
+                      <div>
+                        <i class="icon icon-form-checkbox"></i>
+                      </div>
+                    </div>
+                  </label>
+                </li>
+                <%}%>
+              </ul>
+            </div>
+          </div>
+          <div class="card-footer"></div>
+        </div>
+
+        <%}%>
+      <%}%>
+
+    </script>
+
+    <!-- 模板 -->
+    <script id="tpl-swiper" type="text/html">
+      <div class="vote-total-recently">最近投票 共计<span><%:=data.invitors.length%></span>人</div>
+      <div class="swiper-vote">
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <%for(var i = 0; i < data.invitors.length; i++) {%>
+            <div class="swiper-slide">
+              <div class="avatar" data-user-id="<%:=data.invitors[i].id%>">
+                <div class="avatar-img">
+                  <%if(data.invitors[i].avatar) {%>
+                  <img src="<%:=data.invitors[i].avatar%>" class="img">
+                  <%} else if(data.invitors[i].name) {%>
+                  <div class="img img-text"><%:=data.invitors[i].name.substring(0, 1)%></div>
+                  <%} else if(data.invitors[i].email) {%>
+                  <div class="img img-text"><%:=data.invitors[i].email.substring(0, 1)%></div>
+                  <%} else {%>
+                  <img src="assets/images/avatar-default.png" class="img">
+                  <%}%>
+                </div>
+              </div>
+            </div>
+            <%}%>
+          </div>
+
+        </div>
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </script>
+
+    <!-- Info模板 -->
+    <script id="tpl-modal" type="text/html">
+      <div class="close pull-right">
+        <i class="fa fa-lg fa-close"></i>
+      </div>
+      <div class="avatar-info">
+        <div class="avatar">
+          <div class="avatar-img">
+            <img src="<%:=data.avatar%>" class="img">
+          </div>
+        </div>
+        <div class="avatar-title"><%:=data.name%></div>
+        <div class="avatar-subtitle"><%:=data.email%></div>
+      </div>
+    </script>
+
+    <!-- 模板 -->
+    <script id="tpl-error" type="text/html">
+
+      <div class="content-block empty text-center"><%:=data.message%></div>
+
+    </script>
 
   </div>
 
-  <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.3&key=31e4676d03443e544d4105195c04f1fa"></script>
+  <div class="panel-overlay"></div>
 
-  <!-- build:js assets/scripts/vendor/modernizr.js -->
-  <script src="/bower_components/modernizr/modernizr.js"></script>
-  <!-- endbuild -->
+</div>
 
-  <!-- build:js assets/scripts/vendor.js -->
-  <!-- bower:js -->
-  <script src="/bower_components/jquery/dist/jquery.js"></script>
-  <script src="/bower_components/light7/dist/js/light7.js"></script>
-  <script src="/bower_components/light7/dist/js/light7-swipeout.js"></script>
-  <script src="/bower_components/light7/dist/js/light7-swiper.js"></script>
-  <script src="/bower_components/light7/dist/js/i18n/cn.js"></script>
-  <script src="/bower_components/template.js/template.js"></script>
-  <script src="/bower_components/js-cookie/src/js.cookie.js"></script>
-  <script src="/bower_components/js-base64/base64.js"></script>
-  <script src="/bower_components/jquery-form/jquery.form.js"></script>
-  <script src="/bower_components/jquery-validation/dist/jquery.validate.js"></script>
-  <script src="/bower_components/jquery-md5/jquery.md5.js"></script>
-  <script src="/bower_components/fecha/fecha.js"></script>
-  <script src="/bower_components/arg.js/dist/arg-1.2.js"></script>
-  <script src="/bower_components/js-url/url.js"></script>
-  <!-- endbower -->
-  <!-- endbuild -->
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.3&key=31e4676d03443e544d4105195c04f1fa"></script>
 
-  <!-- build:js assets/scripts/common.js -->
-  <script src="_assets/scripts/common.js"></script>
-  <!-- endbuild -->
+<!-- rev-hash -->
+<!-- build:js assets/scripts/vendor/modernizr.js -->
+<script src="/bower_components/modernizr/modernizr.js"></script>
+<!-- endbuild -->
+<!-- end -->
 
-  <!-- build:js assets/scripts/main.js -->
-  <script src="_assets/scripts/index.js"></script>
-  <script src="_assets/scripts/login.js"></script>
-  <script src="_assets/scripts/main.js"></script>
-  <!-- endbuild -->
+<!-- rev-hash -->
+<!-- build:js assets/scripts/vendor.js -->
+<!-- bower:js -->
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+<script src="/bower_components/light7/dist/js/light7.js"></script>
+<script src="/bower_components/light7/dist/js/light7-swipeout.js"></script>
+<script src="/bower_components/light7/dist/js/light7-swiper.js"></script>
+<script src="/bower_components/light7/dist/js/i18n/cn.js"></script>
+<script src="/bower_components/template.js/template.js"></script>
+<script src="/bower_components/js-cookie/src/js.cookie.js"></script>
+<script src="/bower_components/js-base64/base64.js"></script>
+<script src="/bower_components/jquery-form/jquery.form.js"></script>
+<script src="/bower_components/jquery-validation/dist/jquery.validate.js"></script>
+<script src="/bower_components/jquery-md5/jquery.md5.js"></script>
+<script src="/bower_components/fecha/fecha.js"></script>
+<script src="/bower_components/arg.js/dist/arg-1.2.js"></script>
+<script src="/bower_components/js-url/url.js"></script>
+<script src="/bower_components/store-js/store.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+<!-- end -->
+
+<!-- rev-hash -->
+<!-- build:js assets/scripts/common.js -->
+<script src="_assets/scripts/common.js"></script>
+<!-- endbuild -->
+<!-- end -->
+
+<!-- rev-hash -->
+<!-- build:js assets/scripts/main.js -->
+<script src="_assets/scripts/index.js"></script>
+<script src="_assets/scripts/login.js"></script>
+<script src="_assets/scripts/main.js"></script>
+<!-- endbuild -->
+<!-- end -->
 </body>
 </html>

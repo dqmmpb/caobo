@@ -3,6 +3,30 @@
 //下拉刷新 上拉加载
 $(document).on('pageInit', '#page-index', function(e, id, page) {
 
+  var token = $.Cfg.getTokenStore();
+
+  if(!token) {
+    if($.Cfg.browser.app.isWechat) {
+      var params = {};
+      var searchParam = Arg.parse(location.href);
+      var code = searchParam.code;
+      if(!code) {
+        $.alert('微信授权异常，请确认微信授权');
+      } else {
+        params = {
+          'code': code
+        };
+        token = $.Cfg.getToken(params);
+      }
+    } else {
+      params = {
+        'email': 'dqmmpb@163.com',
+        'name': 'dqmmpb'
+      };
+      token = $.Cfg.getToken(params);
+    }
+  }
+
   var activityId = $.Cfg.getActivityId(location.href);
   activityId = 1;
 
@@ -137,7 +161,7 @@ $(document).on('pageInit', '#page-index', function(e, id, page) {
     var $content = $(page).find('.content');
 
     var $barFooter = $(page).find('.bar-footer');
-    if($barFooter.length == 0) {
+    if($barFooter.length === 0) {
       $barFooter = $('<footer class="bar bar-footer"></footer>');
       $barFooter.insertBefore($($content));
     }
@@ -149,7 +173,7 @@ $(document).on('pageInit', '#page-index', function(e, id, page) {
 
     if(!data.hide_results) {
       var $barFooterS = $(page).find('.footer-secondary');
-      if($barFooterS.length == 0) {
+      if($barFooterS.length === 0) {
         $barFooterS = $('<div class="bar bar-footer-secondary bar-footer-secondary-swiper"></div>');
         $barFooterS.insertBefore($($barFooter));
       }
@@ -165,16 +189,12 @@ $(document).on('pageInit', '#page-index', function(e, id, page) {
 
       var $content = $(page).find('.content');
 
-      var params = {
-        'open_id': 'xaaafdasfasdlkfjl...',
-        'email': 'a@b.com',
-        'name': 'Tom'
-      };
-
       $.ajax({
         url: $.Cfg.api.services.activities.info,
-        data: JSON.stringify(params),
         type: 'GET',
+        headers: {
+          'X-Jwt': token
+        },
         timeout: $.Cfg.config.timeout,
         success: function (data, status) {
           if (data) {
@@ -193,8 +213,12 @@ $(document).on('pageInit', '#page-index', function(e, id, page) {
           }
         },
         error: function(xhr, status, errorThrown) {
-          if (status === 'timeout') {
+          if(status === 'error') {
+            loadError(xhr.responseJSON.error);
+          } else if (status === 'timeout') {
             loadError('网络异常，请刷新重试');
+          } else {
+            loadError('未知错误，请刷新重试');
           }
         },
         complete: function (xhr, status) {

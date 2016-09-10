@@ -6,10 +6,14 @@ import {build as config}  from '../../config';
 
 const $ = gulpLoadPlugins();
 
-gulp.task('build:production', ['html:production', 'images:production', 'fonts:production', 'extras:production'], () => {
+gulp.task('build:production', () => {
+  return gulp.src(config.production.src)
+    .pipe($.size({title: 'build', gzip: true}));
+});
+
+gulp.task('build:production:sequence', (cb) => {
 
   browserSync.notify('Building Production');
 
-  return gulp.src(config.production.src)
-    .pipe($.size({title: 'build', gzip: true}));
+  $.sequence('clean:production', 'build:sequence', ['images:production', 'fonts:production'], 'extras:production', 'html:production', 'build:production', 'rev-hash:sequence', cb);
 });

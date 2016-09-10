@@ -5,28 +5,74 @@
 
     function Cfg() {
       this.config = {
-        server: 'http://' + location.host,
+       // server: 'http://' + location.host,
+        server: 'https://' + '192.168.1.10',
         timeout: 10000,
-        path: ''
+        path: '',
+        token: 'cctech_token'
       };
-
       this.api = {
         services: {
           auth: {
             login: this.config.server + '/ajax/login.json'
           },
+          user: {
+            //token: this.config.server + '/ajax/token.json'
+            token: this.config.server + '/v1/participators'
+          },
           activities: {
-            info: this.config.server + '/ajax/activities.json'
+            //info: this.config.server + '/ajax/activities.json'
+            info: this.config.server + '/v1/activities/09684d94b28b0316'
           }
         }
       };
-
-      this.getActivityId = function(path) {
-        var activityId = url('?activityid', path);
-        if(activityId)
-          return activityId;
-      };
     }
+
+    Cfg.prototype.getActivityId = function(path) {
+      var activityId = url('?activityid', path);
+      if(activityId)
+        return activityId;
+    };
+
+    Cfg.prototype.getTokenStore = function() {
+      return store.get('cctech_token');
+    };
+
+    Cfg.prototype.setTokenStore = function(token) {
+      return store.set('cctech_token', token);
+    };
+
+    Cfg.prototype.getToken = function(params) {
+      var thiz = this, token;
+      //token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwaXJlZF9hdCI6IjIwMTYtMDktMjdUMDI6MjQ6MTQrMDA6MDAifQ.YxpPW4Uyxg6eKCsyrJIWX-exNT09eaTFjdPUokiCAuI';
+      $.ajax({
+        url: $.Cfg.api.services.user.token,
+        data: params,
+        type: 'POST',
+        async: false,
+        timeout: $.Cfg.config.timeout,
+        success: function (data, status) {
+          if (data) {
+            token = thiz.setTokenStore(data.token);
+          } else {
+            $.alert('数据加载有误，请刷新重试');
+          }
+        },
+        error: function(xhr, status, errorThrown) {
+          if(status === 'error') {
+            $.alert(xhr.responseJSON.error);
+          } else if (status === 'timeout') {
+            $.alert('网络异常，请刷新重试');
+          } else {
+            $.alert('未知错误，请刷新重试');
+          }
+        },
+        complete: function (xhr, status) {
+
+        }
+      });
+      return token;
+    };
 /*
     Cfg.prototype.stringify = function(obj, keyPrefix) {
       if(typeof obj === 'object') {
