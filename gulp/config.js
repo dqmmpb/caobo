@@ -175,7 +175,7 @@ module.exports = {
   },
   extras: {
     development: {
-      src: [src + '/*.*', '!'+ src + '/*.html'],
+      src: [src + '/**/*.*', '!' + srcAssets + '/**/*.*', '!'+ src + '/*.html'],
       dest: development,
       resources: {
         src: [srcAssets + '/**/*.*', '!'+ srcAssets + '/less/**', '!'+ srcAssets + '/images/**', '!'+ srcAssets + '/scripts/**', '!'+ srcAssets + '/fonts/**', '!'+ srcAssets + '/**/.*'],
