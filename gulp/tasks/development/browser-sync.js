@@ -8,6 +8,6 @@ const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
 
-gulp.task('browserSync', ['build'], () => {
+gulp.task('browserSync', ['build:sequence'], () => {
   browserSync(config.development);
 });

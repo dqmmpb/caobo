@@ -4,9 +4,10 @@
 $(document).on('pageInit', '#page-index', function(e, id, page) {
 
   var token = $.Cfg.getTokenStore();
+  console.log(JSON.stringify($.detect));
 
   if(!token) {
-    if($.Cfg.browser.app.isWechat) {
+    if($.detect.app.wechat) {
       var params = {};
       var searchParam = Arg.parse(location.href);
       var code = searchParam.code;
