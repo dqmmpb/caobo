@@ -362,12 +362,11 @@ Framework7 Layouts Themes
     color: @activeLink;
   }
 
-  .modal-overlay.modal-overlay-visible, .preloader-indicator-overlay.modal-overlay-visible, .popup-overlay.modal-overlay-visible {
-   // background-image: linear-gradient(top, to bottom, @barsBg, @barsText, @barsBg);
+  .modal-info-overlay.modal-overlay-visible, .modal-login-overlay.modal-overlay-visible {
+    // background-image: linear-gradient(top, to bottom, @barsBg, @barsText, @barsBg);
     .directional-gradient-color(@barsBg, @barsText, @barsBg, 0deg);
     opacity: 1;
   }
-
 
   .page-full-bg {
     // background-image: linear-gradient(top, to bottom, @barsBg, @barsText, @barsBg);
@@ -375,11 +374,26 @@ Framework7 Layouts Themes
     opacity: 1;
   }
 
-  .modal {
+  .modal-login {
     background: @barsBg;
     & .modal-inner {
       background: @barsBg;
       color: @barsText;
+    }
+  }
+
+  .modal.modal-info {
+    background: @barsBg;
+    & .modal-inner {
+      background: @barsBg;
+      color: @barsText;
+    }
+  }
+
+  .modal.modal-preloader {
+    width: 104px;
+    margin-left: -52px;
+    & .modal-inner {
     }
   }
 

@@ -73,3 +73,52 @@
     display: block;
   }
 }
+
+.modal-login {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 11000;
+  display: none;
+  width: 270px;
+  margin-top: 0;
+  margin-left: -135px;
+  color: #3d4145;
+  text-align: center;
+  border-radius: 7px;
+  opacity: 0;
+  -webkit-transition-property: -webkit-transform, opacity;
+  -o-transition-property:      -o-transform, opacity;
+  transition-property:         transform, opacity;
+  -webkit-transform: translate3d(0, 0, 0) scale(1.185);
+  transform: translate3d(0, 0, 0) scale(1.185);
+
+  &.modal-in {
+    opacity: 1;
+    transition-duration: 400ms;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  &.modal-out {
+    z-index: 10999;
+    opacity: 0;
+    transition-duration: 400ms;
+    transform: translate3d(0, 0, 0) scale(.815);
+  }
+}
+
+.modal-login-overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 10600;
+  visibility: hidden;
+  opacity: 0;
+  transition-duration: 400ms;
+  &.modal-overlay-visible {
+    visibility: visible;
+    opacity: 1;
+  }
+}

@@ -16,7 +16,9 @@
 .bar-header-secondary ~ .pull-to-refresh-content, .bar-footer-secondary ~ .pull-to-refresh-content {
   top: 0;
 }
-
+.modal-overlay, .preloader-indicator-overlay, .popup-overlay {
+  transition-duration: 0ms;
+}
 
 #page-index {
 
@@ -141,6 +143,10 @@
     margin: 0;
   }
 
+  .empty {
+    margin: 10px 0;
+  }
+
   .content-block-title {
     margin: 10px 15px;
     text-align: center;
@@ -175,6 +181,7 @@
         padding: 0 15px;
         word-break: break-all;
         min-height: 21px;
+        text-align: justify;
       }
       margin-bottom: 15px;
     }
@@ -315,41 +322,5 @@
       bottom: 0;
       border-radius: 0;
     }
-  }
-}
-
-#page-login {
-
-
-  .login {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    z-index: 11000;
-    width: 270px;
-    margin-top: -100px;
-    margin-left: -135px;
-    color: #3d4145;
-    text-align: center;
-    border-radius: 7px;
-
-    & .login-inner {
-      position: relative;
-      padding: 15px;
-      border-radius: 15px;
-    }
-  }
-
-  .list-block-login {
-
-    .item-content {
-    }
-
-    input[type="text"] {
-    }
-  }
-  .content-block {
-    margin: 0;
-    padding: 0;
   }
 }

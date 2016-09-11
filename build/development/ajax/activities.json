@@ -7,7 +7,7 @@
   "code": "ab23e7f18cddb1b4",
   "hide_results": false,
   "archieved": false,
-  "multi_choice": false,
+  "multi_choice": true,
   "description": "一些描述",
   "place": "杭州西湖",
   "longi_and_lati": "",
@@ -22,6 +22,15 @@
       "id": 2,
       "name": "Tommy",
       "avatar": "http://7xqlni.com1.z0.glb.clouddn.com/Fq2vWh7BGGIg4ITGkjAaCw9ImUN2",
+      "email": "452248365@163.com"
+    },
+    {
+      "id": 3,
+      "name": "Haha",
+      "email": "452248365@163.com"
+    },
+    {
+      "id": 4,
       "email": "452248365@163.com"
     }
   ],

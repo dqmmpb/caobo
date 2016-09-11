@@ -36,13 +36,6 @@
   <!-- 单个page ,第一个.page默认被展示-->
   <div id="page-index" class="page">
     <!-- 标题栏 -->
-    <header class="bar bar-nav">
-     <!-- <a class="icon icon-left pull-left back" href="index.html" alt="返回"></a>-->
-     <!-- <a class="icon fa fa-fw fa-user active pull-left open-panel" data-panel=".panel-left"></a>-->
-      <h1 class="title">我要投票</h1>
-      <a class="icon fa fa-fw fa-sign-out external pull-right" href="login.html" external alt="退出"></a>
-     <!--  <a class="icon fa fa-fw fa-map-marker pull-right" external alt="地点"></a>-->
-    </header>
 
     <!-- 这里是页面内容区 -->
     <div class="content pull-to-refresh-content">
@@ -57,116 +50,159 @@
 
     </div>
 
-    <!-- 模板 -->
-    <script id="tpl-activity" type="text/html">
-
-      <%if(!data) {%>
-        <div class="content-block empty text-center">暂无数据</div>
-      <%} else {%>
-        <%if(data.items && data.items.length) {%>
-        <!-- 活动详情 -->
-        <div class="card activity-card">
-          <div class="card-header"><%:=data.title%></div>
-          <div class="card-content">
-            <div class="card-content-inner"><!--<i class="fa fa-lg fa-pencil-square-o"></i> --><%:=data.description%></div>
-          </div>
-          <div class="card-footer">
-            <div class="list-block media-list user-info">
-              <ul>
-                <li class="item-content">
-                  <div class="item-media avatar" data-user-id="<%:=data['user_info'].id%>">
-                    <div class="avatar-img">
-                      <img src="<%:=data['user_info'].avatar%>" class="img">
-                    </div>
-                  </div>
+    <!-- 登录模板 -->
+    <script id="tpl-login" type="text/template7">
+      <form class="login" method="post">
+        <div class="login-inner">
+          <div class="list-block list-block-login">
+            <ul>
+              <li>
+                <div class="item-content">
+                  <div class="item-media"><i class="fa fa-fw fa-envelope"></i></div>
                   <div class="item-inner">
-                    <div class="item-title-row">
-                      <div class="item-title"><%:=data['user_info'].name%></div>
-                    </div>
-                    <div class="item-title-row">
-                      <div class="item-subtitle"><%:=data['expire_time']%></div>
-                      <div class="item-after"><a href="javascript:void(0);" class="item-after-large"><i class="fa fa-fw fa-2x fa-share-square-o"></i></a> <a href="javascript:void(0);" class="item-after-large"><i class="fa fa-fw fa-2x fa-commenting-o"></i></a></div>
+                    <div class="item-input">
+                      <input name="email" type="text" placeholder="请输入邮箱">
                     </div>
                   </div>
-                </li>
-              </ul>
-            </div>
+                </div>
+              </li>
+              <li>
+                <div class="item-content">
+                  <div class="item-media"><i class="fa fa-fw fa-user"></i></div>
+                  <div class="item-inner">
+                    <div class="item-input">
+                      <input name="name" type="text" placeholder="请输入用户名">
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="content-block">
+            <button type="submit" class="button button-fill button-big button-block button-warning">登录</button>
           </div>
         </div>
+      </form>
+    </script>
 
-        <div class="card activity-card-list">
-          <div class="card-header"></div>
-          <div class="card-content">
-            <!-- 投票选项 -->
-            <div class="list-block media-list inset item-list">
-              <ul>
-                <%for(var i = 0; i < data.items.length; i++) {%>
-                <li>
-                  <label class="label-checkbox item-content">
-                    <%if(data['multi_choice']) {%>
-                    <%if(data.items[i].voted) {%>
-                    <input type="checkbox" name="my-vote" checked>
-                    <%} else {%>
-                    <input type="checkbox" name="my-vote">
-                    <%}%>
-                    <%} else {%>
-                    <%if(data.items[i].voted) {%>
-                    <input type="radio" name="my-vote" checked>
-                    <%} else {%>
-                    <input type="radio" name="my-vote">
-                    <%}%>
-                    <%}%>
-                    <div class="item-inner item-inner-more">
-                      <div class="item-title-row">
-                        <div class="item-title">
-                          <div><%:=data.items[i].content%></div>
-                          <div><%:=data.items[i].content%></div>
-                        </div>
-                        <div class="item-after"><%:=data['hide_results'] ? '': data.items[i].count%></div>
-                      </div>
-                    </div>
-                    <div class="item-media">
-                      <div>
-                        <i class="icon icon-form-checkbox"></i>
-                      </div>
-                    </div>
-                  </label>
-                </li>
-                <%}%>
-              </ul>
-            </div>
-          </div>
-          <div class="card-footer"></div>
+    <!-- 活动模板 -->
+    <script id="tpl-activity" type="text/template7">
+      {{#if data}}
+      {{#with data}}
+      <!-- 活动详情 -->
+      <div class="card activity-card">
+        <div class="card-header">{{title}}</div>
+        <div class="card-content">
+          <div class="card-content-inner"><!--<i class="fa fa-lg fa-pencil-square-o"></i> -->{{description}}</div>
         </div>
+        <div class="card-footer">
+          <div class="list-block media-list user-info">
+            <ul>
+              <li class="item-content">
+                <div class="item-media avatar" data-user-id="{{user_info.id}}">
+                  <div class="avatar-img">
+                    <img src="{{user_info.avatar}}" class="img">
+                  </div>
+                </div>
+                <div class="item-inner">
+                  <div class="item-title-row">
+                    <div class="item-title">{{user_info.name}}</div>
+                  </div>
+                  <div class="item-title-row">
+                    <div class="item-subtitle">{{expire_time}}</div>
+                    <div class="item-after"><a href="javascript:void(0);" class="item-after-large"><i class="fa fa-fw fa-2x fa-share-square-o"></i></a> <a href="javascript:void(0);" class="item-after-large"><i class="fa fa-fw fa-2x fa-commenting-o"></i></a></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
-        <%}%>
-      <%}%>
+      <div class="card activity-card-list">
+        <div class="card-header"></div>
+        <div class="card-content">
+          <!-- 投票选项 -->
+          <div class="list-block media-list inset item-list">
+            <ul>
+              {{#each items}}
+              <li>
+                <label class="label-checkbox item-content">
+                  {{#if ../multi_choice}}
+                  {{#if voted}}
+                  <input value="{{id}}" type="checkbox" name="my-vote" checked>
+                  {{else}}
+                  <input value="{{id}}" type="checkbox" name="my-vote">
+                  {{/if}}
+                  {{else}}
+                  {{#if voted}}
+                  <input value="{{id}}" type="radio" name="my-vote" checked>
+                  {{else}}
+                  <input value="{{id}}" type="radio" name="my-vote">
+                  {{/if}}
+                  {{/if}}
+                  <div class="item-inner item-inner-more">
+                    <div class="item-title-row">
+                      <div class="item-title">
+                        <div>{{content}}</div>
+                        <div>{{content}}</div>
+                      </div>
+                      {{#if ../hide_results}}
+                      <div class="item-after"></div>
+                      {{else}}
+                      <div class="item-after">{{count}}</div>
+                      {{/if}}
+                    </div>
+                  </div>
+                  <div class="item-media">
+                    <div>
+                      <i class="icon icon-form-checkbox"></i>
+                    </div>
+                  </div>
+                </label>
+              </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+        <div class="card-footer"></div>
+      </div>
+      {{/with}}
+      {{else}}
+      <div class="content-block empty text-center">暂无数据</div>
+      {{/if}}
 
     </script>
 
-    <!-- 模板 -->
-    <script id="tpl-swiper" type="text/html">
-      <div class="vote-total-recently">最近投票 共计<span><%:=data.invitors.length%></span>人</div>
+    <!-- 已投票模板 -->
+    <script id="tpl-swiper" type="text/template7">
+      {{#if data}}
+      {{#with data}}
+      <div class="vote-total-recently">最近投票 共计<span>{{invitors.length}}</span>人</div>
       <div class="swiper-vote">
         <div class="swiper-container">
           <div class="swiper-wrapper">
-            <%for(var i = 0; i < data.invitors.length; i++) {%>
+            {{#each invitors}}
             <div class="swiper-slide">
-              <div class="avatar" data-user-id="<%:=data.invitors[i].id%>">
+              <div class="avatar" data-user-id="{{id}}">
                 <div class="avatar-img">
-                  <%if(data.invitors[i].avatar) {%>
-                  <img src="<%:=data.invitors[i].avatar%>" class="img">
-                  <%} else if(data.invitors[i].name) {%>
-                  <div class="img img-text"><%:=data.invitors[i].name.substring(0, 1)%></div>
-                  <%} else if(data.invitors[i].email) {%>
-                  <div class="img img-text"><%:=data.invitors[i].email.substring(0, 1)%></div>
-                  <%} else {%>
+                  {{#if avatar}}
+                  <img src="{{avatar}}" class="img">
+                  {{else}}
+                  {{#if name}}
+                  <div class="img img-text">{{js "this.name.substring(0, 1)"}}</div>
+                  {{else}}
+                  {{#if email}}
+                  <div class="img img-text">{{js "this.email.substring(0, 1)"}}</div>
+                  {{else}}
                   <img src="assets/images/avatar-default.png" class="img">
-                  <%}%>
+                  {{/if}}
+                  {{/if}}
+                  {{/if}}
                 </div>
               </div>
             </div>
-            <%}%>
+            {{/each}}
           </div>
 
         </div>
@@ -174,29 +210,49 @@
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
       </div>
+      {{/with}}
+      {{/if}}
     </script>
 
-    <!-- Info模板 -->
-    <script id="tpl-modal" type="text/html">
+    <!-- 用户信息模板 -->
+    <script id="tpl-modal" type="text/template7">
       <div class="close pull-right">
         <i class="fa fa-lg fa-close"></i>
       </div>
+      {{#if data}}
+      {{#with data}}
       <div class="avatar-info">
         <div class="avatar">
           <div class="avatar-img">
-            <img src="<%:=data.avatar%>" class="img">
+            {{#if avatar}}
+            <img src="{{avatar}}" class="img">
+            {{else}}
+            <img src="assets/images/avatar-default.png" class="img">
+            {{/if}}
           </div>
         </div>
-        <div class="avatar-title"><%:=data.name%></div>
-        <div class="avatar-subtitle"><%:=data.email%></div>
+        {{#if name}}
+        <div class="avatar-title">{{name}}</div>
+        {{else}}
+        <div class="avatar-title">匿名</div>
+        {{/if}}
+        {{#if email}}
+        <div class="avatar-title">{{email}}</div>
+        {{else}}
+        <div class="avatar-title">暂无邮箱信息</div>
+        {{/if}}
       </div>
+      {{/with}}
+      {{/if}}
     </script>
 
-    <!-- 模板 -->
-    <script id="tpl-error" type="text/html">
-
-      <div class="content-block empty text-center"><%:=data.message%></div>
-
+    <!-- 错误提示模板 -->
+    <script id="tpl-error" type="text/template7">
+      {{#if data}}
+      {{#with data}}
+      <div class="content-block empty text-center">{{message}}</div>
+      {{/with}}
+      {{/if}}
     </script>
 
   </div>
@@ -221,17 +277,15 @@
 <script src="/bower_components/light7/dist/js/light7-swipeout.js"></script>
 <script src="/bower_components/light7/dist/js/light7-swiper.js"></script>
 <script src="/bower_components/light7/dist/js/i18n/cn.js"></script>
-<script src="/bower_components/template.js/template.js"></script>
 <script src="/bower_components/js-cookie/src/js.cookie.js"></script>
 <script src="/bower_components/js-base64/base64.js"></script>
 <script src="/bower_components/jquery-form/jquery.form.js"></script>
 <script src="/bower_components/jquery-validation/dist/jquery.validate.js"></script>
 <script src="/bower_components/jquery-md5/jquery.md5.js"></script>
 <script src="/bower_components/fecha/fecha.js"></script>
-<script src="/bower_components/arg.js/dist/arg-1.2.js"></script>
-<script src="/bower_components/js-url/url.js"></script>
 <script src="/bower_components/store-js/store.js"></script>
 <script src="/bower_components/jquery.detect.js/dist/js/jquery.detect.js"></script>
+<script src="/bower_components/arg.js/dist/arg-1.2.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 <!-- end -->
@@ -245,7 +299,6 @@
 <!-- rev-hash -->
 <!-- build:js assets/scripts/main.js -->
 <script src="_assets/scripts/index.js"></script>
-<script src="_assets/scripts/login.js"></script>
 <script src="_assets/scripts/main.js"></script>
 <!-- endbuild -->
 <!-- end -->
