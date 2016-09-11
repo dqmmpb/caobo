@@ -373,19 +373,9 @@ $(document).on('pageInit', '#page-index', function(e, id, page) {
 
     if(!token) {
       if($.detect.app.wechat) {
-        /*var params = {};
-        var searchParam = Arg.parse(location.href);
-        var code = searchParam.code;
-        if(!code) {
-          $.alert('微信授权异常，请确认微信授权');
-        } else {
-          params = {
-            'code': code
-          };
-          token = $.Cfg.getToken(params);
-        }*/
         token = $.Cfg.getTokenCookie();
-        $.alert(token);
+        $.Cfg.setTokenStore(token);
+        init();
       } else {
         initLogin();
       }
