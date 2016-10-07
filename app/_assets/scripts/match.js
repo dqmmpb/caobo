@@ -1,7 +1,7 @@
 'use strict';
 
 //下拉刷新 上拉加载
-$(document).on('pageInit', '#page-index', function(e, id, page) {
+$(document).on('pageInit', '#page-match', function(e, id, page) {
 
   $.modal.prototype.defaults.closePrevious = false;
 
@@ -150,7 +150,7 @@ $(document).on('pageInit', '#page-index', function(e, id, page) {
       $barHeader.insertBefore($($content));
     }
 
-    $barHeader.html($('<h1 class="title">我要投票</h1><a id="logout" class="icon fa fa-fw fa-sign-out external pull-right" href="javascript:void(0)" external alt="退出"></a>'));
+    $barHeader.html($('<h1 class="title">活动详情</h1><a id="logout" class="icon fa fa-fw fa-sign-out external pull-right" href="javascript:void(0)" external alt="退出"></a>'));
     $('#logout').click(function() {
       $.Cfg.removeTokenStore();
       $.Cfg.removeTokenCookie();
@@ -168,9 +168,9 @@ $(document).on('pageInit', '#page-index', function(e, id, page) {
     }
 
     if(data.archieved)
-      $barFooter.html($('<a class="button button-block button-fill button-primary button-next disabled">投票结束</a>'));
+      $barFooter.html($('<a id="go-watch" class="button button-block button-fill button-primary button-next">查看我的匹配时间</a>'));
     else
-      $barFooter.html($('<a id="vote" class="button button-block button-fill button-primary button-next">投票</a>'));
+      $barFooter.html($('<a id="go-in" class="button button-block button-fill button-primary button-next">参加此次活动</a>'));
 
     if(!data.hide_results) {
       var $barFooterS = $(page).find('.footer-secondary');
@@ -182,17 +182,25 @@ $(document).on('pageInit', '#page-index', function(e, id, page) {
       initSwiper(data, append);
     }
 
-    $('#vote').click(function() {
-      var allChecked = $content.find('input[name="my-vote"]:checked');
-      var item_ids = [];
-      for(var i = 0; i < allChecked.length; i++){
-        item_ids.push($(allChecked[i]).val());
-      }
+    $('#go-in').click(function(event) {
+      event.preventDefault();
 
       var token = $.Cfg.getTokenStore();
 
-      if(activityId) {
-        var params = {
+      if(activityId || $.Cfg.config.local) {
+        $.modal({
+          text: '请问是否要参与此次活动？',
+          title: '活动邀请',
+          buttons: [
+            {text: '不参与', onClick: function() {
+              console.log('cancel');
+            }},
+            {text: '参与', onClick: function() {
+              console.log('ok');
+            }}
+          ]
+        });
+        /*var params = {
           code: activityId,
           item_ids: item_ids
         };
@@ -218,7 +226,7 @@ $(document).on('pageInit', '#page-index', function(e, id, page) {
               loadError('未知错误，请刷新重试');
             }
           }
-        });
+        });*/
       } else {
         loadError('活动链接已失效');
       }
@@ -244,7 +252,7 @@ $(document).on('pageInit', '#page-index', function(e, id, page) {
       };
 
       $.ajax({
-        url: $.Cfg.api.services.activities.info,
+        url: $.Cfg.api.services.activities.matches,
         type: $.Cfg.api.type,
         headers: {
           'X-Jwt': token

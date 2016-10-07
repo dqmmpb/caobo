@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-<title>我要投票</title>
+<title>活动匹配</title>
 
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <!-- Place favicon.ico in the root directory -->
@@ -34,7 +34,7 @@
 <!-- page集合的容器，里面放多个平行的.page，其他.page作为内联页面由路由控制展示 -->
 <div class="page-group">
   <!-- 单个page ,第一个.page默认被展示-->
-  <div id="page-index" class="page">
+  <div id="page-match" class="page">
     <!-- 标题栏 -->
 
     <!-- 这里是页面内容区 -->
@@ -57,9 +57,6 @@
       <!-- 活动详情 -->
       <div class="card activity-card">
         <div class="card-header">{{title}}</div>
-        <div class="card-content">
-          <div class="card-content-inner"><!--<i class="fa fa-lg fa-pencil-square-o"></i> -->{{description}}</div>
-        </div>
         <div class="card-footer">
           <div class="list-block media-list user-info">
             <ul>
@@ -258,8 +255,8 @@
 <!-- end -->
 
 <!-- rev-hash -->
-<!-- build:js assets/scripts/index.js -->
-<script src="_assets/scripts/index.js"></script>
+<!-- build:js assets/scripts/match.js -->
+<script src="_assets/scripts/match.js"></script>
 <script src="_assets/scripts/main.js"></script>
 <!-- endbuild -->
 <!-- end -->
